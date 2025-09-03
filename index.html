@@ -377,16 +377,16 @@ h(Math,"asinh",xr.asinh,Math.asinh(1e300)===Infinity);h(Math,"atanh",xr.atanh,Ma
 ;require("harlowe")}());
 </script>
 <script>
-  window.addEventListener('load', function() {
+  // Harlowe event: fires after a passage is displayed
+  $(document).on(':passagedisplay', function (event) {
 
-    // Harlowe variables
-    var clicks = window.story.state.$clicks || 0;
-    var name = window.story.state.$name || "";
-    var studentId = window.story.state.$studentId || "";
+    // Only send data when reaching the final passage
+    if (event.passage.title === "Question 20 Correct") {  // Replace with your final passage
+      var clicks = window.story.state.$clicks || 0;
+      var name = window.story.state.$name || "";
+      var studentId = window.story.state.$studentId || "";
 
-    // Only send once at the final passage
-    if (window.story.currentPassage === "Question 20 Correct") {
-      fetch("https://script.google.com/macros/s/AKfycbyKZsE8Xrw0myuDC49tkmfafVPXz3K1BzA_nG5pYhhb34QYfsVSzDLC3UUNeOLFvcb3/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbyKZsE8Xrw0myuDC49tkmfafVPXz3K1BzA_nG5pYhhb34QYfsVSzDLC3UUNeOLFvcb3/exec", {  // Replace with your Google Apps Script URL
         method: "POST",
         body: JSON.stringify({
           name: name,
