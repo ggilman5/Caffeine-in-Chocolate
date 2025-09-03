@@ -377,26 +377,23 @@ h(Math,"asinh",xr.asinh,Math.asinh(1e300)===Infinity);h(Math,"atanh",xr.atanh,Ma
 ;require("harlowe")}());
 </script>
 <script>
-  // Wait until the story is fully loaded
   window.addEventListener('load', function() {
 
-    // Access Harlowe variables
+    // Harlowe variables
     var clicks = window.story.state.$clicks || 0;
     var name = window.story.state.$name || "";
     var studentId = window.story.state.$studentId || "";
 
-    // Only send once when reaching a certain passage (optional)
-    if (window.story.currentPassage === "Question 20 Correct") { // Replace "End" with your final passage name
-      fetch("https://script.google.com/macros/s/AKfycbyF4jBihTTcvD6-GPvwiGn1YTzhSe0KRQNZFgo4ytDrN6mY3pqWD3KpXCoG17XG-Xcb/exec", {
+    // Only send once at the final passage
+    if (window.story.currentPassage === "Question 20 Correct") {
+      fetch("https://script.google.com/macros/s/AKfycbyKZsE8Xrw0myuDC49tkmfafVPXz3K1BzA_nG5pYhhb34QYfsVSzDLC3UUNeOLFvcb3/exec", {
         method: "POST",
         body: JSON.stringify({
           name: name,
           studentId: studentId,
           clicks: clicks
         }),
-        headers: {
-          "Content-Type": "application/json"
-        }
+        headers: { "Content-Type": "application/json" }
       })
       .then(response => console.log("Data sent to Google Sheets:", response))
       .catch(error => console.error("Error sending data:", error));
